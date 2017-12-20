@@ -98,51 +98,60 @@ typedef struct
   uint32_t ks[AES_BLOCKSZ / 4 * (CF_AES_MAXROUNDS + 1)];
 } cf_aes_context;
 
-/* .. c:function:: $DECL
- * This function does AES key expansion.  It destroys
- * existing contents of :c:data:`ctx`.
- *
- * :param ctx: expanded key context, filled in by this function.
- * :param key: pointer to key material, of :c:data:`nkey` bytes.
- * :param nkey: length of key material. Must be `16`, `24` or `32`.
- */
-extern void cf_aes_init(cf_aes_context *ctx,
-                        const uint8_t *key,
-                        size_t nkey);
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/* .. c:function:: $DECL
- * Encrypts the given block, from :c:data:`in` to :c:data:`out`.
- * These may alias.
- *
- * Fails at runtime if :c:data:`ctx` is invalid.
- *
- * :param ctx: expanded key context
- * :param in: input block (read)
- * :param out: output block (written)
- */
-extern void cf_aes_encrypt(const cf_aes_context *ctx,
-                           const uint8_t in[AES_BLOCKSZ],
-                           uint8_t out[AES_BLOCKSZ]);
+  /* .. c:function:: $DECL
+   * This function does AES key expansion.  It destroys
+   * existing contents of :c:data:`ctx`.
+   *
+   * :param ctx: expanded key context, filled in by this function.
+   * :param key: pointer to key material, of :c:data:`nkey` bytes.
+   * :param nkey: length of key material. Must be `16`, `24` or `32`.
+   */
+  extern void cf_aes_init(cf_aes_context *ctx,
+    const uint8_t *key,
+    size_t nkey);
 
-/* .. c:function:: $DECL
- * Decrypts the given block, from :c:data:`in` to :c:data:`out`.
- * These may alias.
- *
- * Fails at runtime if :c:data:`ctx` is invalid.
- *
- * :param ctx: expanded key context
- * :param in: input block (read)
- * :param out: output block (written)
- */
-extern void cf_aes_decrypt(const cf_aes_context *ctx,
-                           const uint8_t in[AES_BLOCKSZ],
-                           uint8_t out[AES_BLOCKSZ]);
+  /* .. c:function:: $DECL
+   * Encrypts the given block, from :c:data:`in` to :c:data:`out`.
+   * These may alias.
+   *
+   * Fails at runtime if :c:data:`ctx` is invalid.
+   *
+   * :param ctx: expanded key context
+   * :param in: input block (read)
+   * :param out: output block (written)
+   */
+  extern void cf_aes_encrypt(const cf_aes_context *ctx,
+    const uint8_t in[AES_BLOCKSZ],
+    uint8_t out[AES_BLOCKSZ]);
 
-/* .. c:function:: $DECL
- * Erase scheduled key material.
- *
- * Call this when you're done to erase the round keys. */
-extern void cf_aes_finish(cf_aes_context *ctx);
+  /* .. c:function:: $DECL
+   * Decrypts the given block, from :c:data:`in` to :c:data:`out`.
+   * These may alias.
+   *
+   * Fails at runtime if :c:data:`ctx` is invalid.
+   *
+   * :param ctx: expanded key context
+   * :param in: input block (read)
+   * :param out: output block (written)
+   */
+  extern void cf_aes_decrypt(const cf_aes_context *ctx,
+    const uint8_t in[AES_BLOCKSZ],
+    uint8_t out[AES_BLOCKSZ]);
+
+  /* .. c:function:: $DECL
+   * Erase scheduled key material.
+   *
+   * Call this when you're done to erase the round keys. */
+  extern void cf_aes_finish(cf_aes_context *ctx);
+
+#ifdef __cplusplus
+}
+#endif
+
 
 /* .. c:var:: const cf_prp cf_aes
  * Abstract interface to AES.  See :c:type:`cf_prp` for

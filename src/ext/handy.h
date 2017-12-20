@@ -12,6 +12,7 @@
 /* Evaluates to the number of items in array-type variable arr. */
 #define ARRAYCOUNT(arr) (sizeof arr / sizeof arr[0])
 
+#if (ARM_CORE > 0)
 /* Normal MIN/MAX macros.  Evaluate argument expressions only once. */
 #ifndef MIN
   #define MIN(x, y) \
@@ -34,6 +35,17 @@
       (x) = (y); \
       (y) = __tmp; \
     } while (0)
+#endif
+#else
+
+#ifndef MAX
+#define MAX(x,y) (((x)>(y)) ? (x) : (y))
+#endif
+
+#ifndef MIN
+#define MIN(x,y) (((x)<(y)) ? (x) : (y))
+#endif
+
 #endif
 
 /** Stringify its argument. */

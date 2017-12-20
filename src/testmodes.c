@@ -92,6 +92,7 @@ static void test_ctr(void)
   const void *nonce = "\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff";
   const void *key = "\x2b\x7e\x15\x16\x28\xae\xd2\xa6\xab\xf7\x15\x88\x09\xcf\x4f\x3c";
   const void *inp = "\x6b\xc1\xbe\xe2\x2e\x40\x9f\x96\xe9\x3d\x7e\x11\x73\x93\x17\x2a";
+  const uint8_t *inp8 = (const uint8_t *)inp;
   const void *expect = "\x87\x4d\x61\x91\xb6\x20\xe3\x26\x1b\xef\x68\x64\x99\x0d\xb6\xce";
 
   cf_aes_context aes;
@@ -109,7 +110,7 @@ static void test_ctr(void)
   
   cf_ctr_init(&ctr, &cf_aes, &aes, nonce);
   cf_ctr_cipher(&ctr, inp, out, 1); /* incremental */
-  cf_ctr_cipher(&ctr, inp + 1, out + 1, 15);
+  cf_ctr_cipher(&ctr, inp8 + 1, out + 1, 15);
   TEST_CHECK(memcmp(expect, out, 16) == 0);
 
   uint8_t decrypt[16];

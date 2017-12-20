@@ -18,6 +18,14 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#ifndef ARM_CORE
+#if defined(CORTEX_M0) || defined(CORTEX_M3) || defined(CORTEX_M4)
+#define ARM_CORE 1
+#else
+#define ARM_CORE 0
+#endif
+#endif
+
 /* Assorted bitwise and common operations used in ciphers. */
 
 /** Circularly rotate right x by n bits.
@@ -286,9 +294,23 @@ static inline void copy_bytes_unaligned(uint8_t *out, const uint8_t *in, size_t 
   }
 }
 
+
+#if (ARM_CORE > 0)
 static inline uint32_t count_trailing_zeroes(uint32_t x)
 {
   return (uint32_t) __builtin_ctzl(x);
 }
+#else
+static inline uint32_t count_trailing_zeroes(uint32_t x)
+{
+  uint32_t mask = 0x01u;
+  uint32_t cnt = 0;
+  while ((mask) && (0 == (mask & x))) {
+    cnt++;
+    mask <<= 1;
+  }
+  return cnt;
+}
+#endif
 
 #endif
