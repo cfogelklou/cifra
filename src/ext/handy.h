@@ -83,8 +83,8 @@ static inline void mem_clean(volatile void *v, size_t len)
  *  Does not leak length of common prefix through timing. */
 static inline unsigned mem_eq(const void *va, const void *vb, size_t len)
 {
-  const volatile uint8_t *a = va;
-  const volatile uint8_t *b = vb;
+  const volatile uint8_t *a = (const volatile uint8_t *)va;
+  const volatile uint8_t *b = (const volatile uint8_t *)vb;
   uint8_t diff = 0;
 
   while (len--)
