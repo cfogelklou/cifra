@@ -49,7 +49,7 @@ typedef void (*cf_prp_block)(void *ctx, const uint8_t *in, uint8_t *out);
  * .. c:member:: cf_prp.decrypt
  * Block decryption function.
  */
-typedef struct
+typedef struct cf_prp_tag
 {
   size_t blocksz;
   cf_prp_block encrypt;
