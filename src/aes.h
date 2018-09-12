@@ -148,14 +148,13 @@ extern "C" {
    * Call this when you're done to erase the round keys. */
   extern void cf_aes_finish(cf_aes_context *ctx);
 
+  /* .. c:var:: const cf_prp cf_aes
+   * Abstract interface to AES.  See :c:type:`cf_prp` for
+   * more information. */
+  extern const cf_prp cf_aes;
+
 #ifdef __cplusplus
 }
 #endif
-
-
-/* .. c:var:: const cf_prp cf_aes
- * Abstract interface to AES.  See :c:type:`cf_prp` for
- * more information. */
-extern const cf_prp cf_aes;
 
 #endif
