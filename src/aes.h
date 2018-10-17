@@ -92,7 +92,7 @@
  * 
  * Expanded key material.  Filled in by :c:func:`cf_aes_init`.
  */
-typedef struct
+typedef struct cf_aes_context_tag
 {
   uint32_t rounds;
   uint32_t ks[AES_BLOCKSZ / 4 * (CF_AES_MAXROUNDS + 1)];

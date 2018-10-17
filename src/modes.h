@@ -114,7 +114,7 @@ void cf_cbc_decrypt(cf_cbc *ctx, const uint8_t *input, uint8_t *output, size_t b
  * .. c:member:: cf_ctr.counter_width
  * The width (in bytes) of the counter block in the nonce.
  */
-typedef struct
+typedef struct cf_ctr_tag
 {
   const cf_prp *prp;
   void *prpctx;
@@ -177,7 +177,7 @@ void cf_ctr_discard_block(cf_ctr *ctx);
  * .. c:member:: cf_cbcmac.used
  * How many bytes at the front of :c:member:`buffer` are valid.
  */
-typedef struct
+typedef struct cf_cbcmac_stream_tag
 {
   const cf_prp *prp;
   void *prpctx;
@@ -246,7 +246,7 @@ void cf_cbcmac_stream_pad_final(cf_cbcmac_stream *ctx, uint8_t out[CF_MAXBLOCK])
  * The XOR offset for the last message block if it is a partial block
  * (also known as K\ :sub:`2`).
  */
-typedef struct
+typedef struct cf_cmac_tag
 {
   const cf_prp *prp;
   void *prpctx;
@@ -292,7 +292,7 @@ void cf_cmac_sign(cf_cmac *ctx, const uint8_t *data, size_t bytes,
  * A flag set when the final chunk of the message has been processed.
  * Only when this flag is set can you get the MAC out.
  */
-typedef struct
+typedef struct cf_cmac_stream_tag
 {
   cf_cmac cmac;
   cf_cbc cbc;
