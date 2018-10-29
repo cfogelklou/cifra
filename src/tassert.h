@@ -23,6 +23,7 @@
  */
 
 #ifndef FULL_FAT_ASSERT
+#undef assert
 # include <stdlib.h>
 # define assert(expr) do { if (!(expr)) abort(); } while (0)
 #else
